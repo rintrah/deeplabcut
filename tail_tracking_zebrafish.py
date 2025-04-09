@@ -18,11 +18,11 @@ from deeplabcut.core.engine import Engine
 engine = Engine.PYTORCH
 
 if platform == 'linux' or platform == 'linux2':
-    video = ["/home/enrique/WashU/Data/20220218-f11/videos/2022-02-18-13-11-27.mp4"] # Enter the paths of your videos or Folder you want to grab frames from.
+    video = ["/home/enrique/WashU/Data/20210608-f1/2021-06-08-14-54-59.mp4"] # Enter the paths of your videos or Folder you want to grab frames from.
     working_directory = "/home/enrique/DeepLabCut/"
     path_config_file  = "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/config.yaml"
-    videofile_path    = ["/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2022-02-18-13-11-27.mp4"] # Enter a folder or a list of videos to analyze.
-    destfolder        = "/home/enrique/DeepLabCut/One-photon-Hansen-2025-04-03/analyze-videos"
+    videofile_path    = ["/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-06-08-14-54-59.mp4"] # Enter a folder or a list of videos to analyze.
+    destfolder        = "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos"
     #matplotlib.use('Agg')
 elif platform == 'darwin':
     video ["/home/enrique/WashU/Data/20220218-f11/videos/2022-02-18-13-11-27.mp4"] # Enter the paths of your videos or Folder you want to grab frames from.
@@ -79,6 +79,6 @@ experimenter	= "Hansen"   # Enter the name of the experimenter.
 # deeplabcut.evaluate_network(path_config_file, plotting=True)
 
 
-deeplabcut.analyze_videos(path_config_file, videofile_path, videotype='.mp4', save_as_csv=True, destfolder=destfolder)
+deeplabcut.analyze_videos(path_config_file, videofile_path, videotype='.mp4', save_as_csv=True, destfolder=destfolder, dynamic=(True,.5,10))
 
 # deeplabcut.create_labeled_video(path_config_file, videofile_path, videotype=".mp4", fastmode=True, Frames2plot=list(range(60*60*500,70*60*500 )), save_frames=False, draw_skeleton=True)
