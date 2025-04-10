@@ -9,6 +9,9 @@ import numpy as np
 import pandas as pd 
 
 import matplotlib.pyplot as plt 
+from scipy.interpolate import interp1d
+
+import pdb
 
 path_name = "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2022-03-14-12-12-26DLC_Resnet50_One-photonApr3shuffle1_snapshot_030.h5"
 
@@ -16,6 +19,8 @@ path_name = "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-video
 Dataframe = pd.read_hdf(path_name)
 
 Dataframe.head()
+
+idx = pd.IndexSlice
 
 def get_cmap(n, name='hsv'):
 	return plt.get_cmap(name, n)
@@ -31,28 +36,17 @@ def PlottingResults(Dataframe, bodyparts2plot, alphavalue=0.2, pcutoff=0.5, colo
 	"""
 	plt.figure(figsize=fs)
 	colors = get_cmap(len(bodyparts2plot), name=colormap)
-	scorer = Dataframe.columns.get_level_values(0)[0] # You can read out the header to get the scorer name! 
-	
-	for bpindex, bp in enumerate(bodyparts2plot):
-		Index = Dataframe[scorer][bp]['likelihood'].values > pcutoff
-		plt.plot(Dataframe[scorer][bp]['x'].values[Index], Dataframe[scorer][bp]['y'].values[Index], '.', markersize=5, color=colors(bpindex), alpha=alphavalue)
-		
+	# We focus on the range defined by 70 minutes and 80 minutes of the recording.
+	# Create matrix with the DeepLabCut information.  (Pandas is too slow!)
+	xytp = np.array([Dataframe.loc[:, idx[:, :, 'x']].values, Dataframe.loc[:, idx[:, :, 'y']].values])
+	for t in np.arange(0, xytp.shape[1], 500):
+		plt.plot(xytp[0, t,:], xytp[1, t,:], c='gray', alpha=0.2)
+
+	plt.plot([plt.gca().axis()[0], plt.gca().axis()[3]], [xytp[0, 0,0], xytp[1, 0,0]], c='r', lw=2)
 	plt.gca().invert_yaxis()
+	plt.show()
 	
-	sm    = plt.cm.ScalarMappable(cmap=plt.get_cmap(colormap), norm=plt.Normalize(vmin=0, vmax=len(bodyparts2plot) - 1))
-	sm._A = [] 
-	cbar  = plt.colorbar(sm, ticks=range(len(bodyparts2plot)))
-	cbar.set_ticklabels(bodyparts2plot)
-	plt.figure(figsize=fs)
-	Time = np.arange(np.size([scorer][bodyparts2plot[0]]['x'].values))
-	
-	plt.xlabel('Frame index')
-	plt.ylabel('X and y-position in pixels')
-	
-	plt.figure(figsize=fs)
-	
-bodyparts =  Dataframe.columns.get_level_values(1)  # You can read out the header to get body part names!
+# The way the programmers of DeepLabCut established that Dataframe columns has three levels:  1. The name of the model, 2. the body parts, and 3. the coordinates and likelihood.
+bodyparts =  Dataframe.columns.levels[1].to_list() 
 
-bodyparts2plot = np.unique(bodyparts)
-
-PlottingResults(Dataframe, bodyparts2plot, alphavalue=0.2, pcutoff=0.5, fs=(8,4))
+PlottingResults(Dataframe, bodyparts, alphavalue=0.2, pcutoff=0.5, fs=(8,4))

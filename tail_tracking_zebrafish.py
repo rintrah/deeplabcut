@@ -21,7 +21,9 @@ if platform == 'linux' or platform == 'linux2':
     video = ["/home/enrique/WashU/Data/20210608-f1/2021-06-08-14-54-59.mp4"] # Enter the paths of your videos or Folder you want to grab frames from.
     working_directory = "/home/enrique/DeepLabCut/"
     path_config_file  = "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/config.yaml"
-    videofile_path    = ["/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-06-08-14-54-59.mp4"] # Enter a folder or a list of videos to analyze.
+    videofile_path    = ["/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-13-12-49-43.mp4", 
+							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-06-13-48-55.mp4",
+							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-06-25-15-21-37.mp4"] # Enter a folder or a list of videos to analyze.
     destfolder        = "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos"
     #matplotlib.use('Agg')
 elif platform == 'darwin':
