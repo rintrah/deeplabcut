@@ -10,10 +10,14 @@ import pandas as pd
 
 import matplotlib.pyplot as plt 
 from scipy.interpolate import interp1d
+from skspatial.objects import Line, Point
 
 import pdb
 
-path_name = "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2022-03-14-12-12-26DLC_Resnet50_One-photonApr3shuffle1_snapshot_030.h5"
+#path_name = "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2022-03-14-12-12-26DLC_Resnet50_One-photonApr3shuffle1_snapshot_030.h5"
+
+#path_name = "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2022-02-18-13-11-27DLC_Resnet50_One-photonApr3shuffle1_snapshot_030.h5"
+path_name = "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-06-13-48-55DLC_Resnet50_One-photonApr3shuffle1_snapshot_030.h5"
 
 # Load h5 file. 
 Dataframe = pd.read_hdf(path_name)
@@ -42,9 +46,23 @@ def PlottingResults(Dataframe, bodyparts2plot, alphavalue=0.2, pcutoff=0.5, colo
 	for t in np.arange(0, xytp.shape[1], 500):
 		plt.plot(xytp[0, t,:], xytp[1, t,:], c='gray', alpha=0.2)
 
-	plt.plot([plt.gca().axis()[0], plt.gca().axis()[3]], [xytp[0, 0,0], xytp[1, 0,0]], c='r', lw=2)
+	
+	line = Line.from_points(point_a=[plt.gca().axis()[0], plt.gca().axis()[3]], point_b=[xytp[0, 0,0], xytp[1, 0,0]])
+	point = Point([xytp[0, 10000, -1], xytp[1, 10000,-1]])
+	point_projected = line.project_point(point)
+	plt.plot([plt.gca().axis()[0], plt.gca().axis()[3]],[xytp[0, 0,0], xytp[1, 0,0]] , c='r', lw=2)
+	plt.scatter(point_projected[0], point_projected[1])
 	plt.gca().invert_yaxis()
 	plt.show()
+	
+	# points_vect = np.zeros((np.arange(0, xytp.shape[1], 500).size, ))
+	# for i, t in enumerate(np.arange(0, xytp.shape[1], 500)):
+		# raw_point = [xytp[0, t, 0], xytp[1, t, 0]]
+		# point = Point(raw_point)
+		# point_projected = line.project_point(point)
+		# points_vect[i]  = (raw_point - point_projected)[1]
+	# plt.plot(points_vect)
+	# plt.show() 
 	
 # The way the programmers of DeepLabCut established that Dataframe columns has three levels:  1. The name of the model, 2. the body parts, and 3. the coordinates and likelihood.
 bodyparts =  Dataframe.columns.levels[1].to_list() 

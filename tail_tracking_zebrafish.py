@@ -18,12 +18,20 @@ from deeplabcut.core.engine import Engine
 engine = Engine.PYTORCH
 
 if platform == 'linux' or platform == 'linux2':
-    video = ["/home/enrique/WashU/Data/20210608-f1/2021-06-08-14-54-59.mp4"] # Enter the paths of your videos or Folder you want to grab frames from.
+    video = ["/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-06-08-14-54-59.mp4",
+							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-13-12-49-43.mp4", 
+							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-06-13-48-55.mp4",
+							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-06-25-15-21-37.mp4",
+							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2022-02-18-13-11-27.mp4",
+							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2022-03-14-12-12-26.mp4"]  # Enter the paths of your videos or Folder you want to grab frames from.
     working_directory = "/home/enrique/DeepLabCut/"
     path_config_file  = "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/config.yaml"
-    videofile_path    = ["/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-13-12-49-43.mp4", 
+    videofile_path    = ["/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-06-08-14-54-59.mp4",
+							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-13-12-49-43.mp4", 
 							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-06-13-48-55.mp4",
-							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-06-25-15-21-37.mp4"] # Enter a folder or a list of videos to analyze.
+							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-06-25-15-21-37.mp4",
+							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2022-02-18-13-11-27.mp4",
+							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2022-03-14-12-12-26.mp4"] # Enter a folder or a list of videos to analyze.
     destfolder        = "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos"
     #matplotlib.use('Agg')
 elif platform == 'darwin':
@@ -58,14 +66,14 @@ experimenter	= "Hansen"   # Enter the name of the experimenter.
 # Enter the path of the config file that was just created from the above step (check the folder):
 # path_config_file = "/home/Mackenzie/Reaching/config.yaml"
 
-# deeplabcut.extract_frames(path_config_file, mode="automatic", cluster_step=1)
+deeplabcut.extract_frames(path_config_file, mode="automatic", cluster_step=1, userfeedback=True)
 
-# # Napari will pop up!
-# # Please go to plugin > deeplabcut to start
-# # then, drag-and-drop the project configuration file into the viewer (the value of path_config_file)
-# # finally, drop the folder containing the images (in 'labeled-data') in the viewer.
+# Napari will pop up!
+# Please go to plugin > deeplabcut to start
+# then, drag-and-drop the project configuration file into the viewer (the value of path_config_file)
+# finally, drop the folder containing the images (in 'labeled-data') in the viewer.
 
-# deeplabcut.label_frames(path_config_file)
+deeplabcut.label_frames(path_config_file)
 
 # deeplabcut.check_labels(path_config_file) # This creates a subdirectory with the frames + your labels.
 
@@ -81,6 +89,6 @@ experimenter	= "Hansen"   # Enter the name of the experimenter.
 # deeplabcut.evaluate_network(path_config_file, plotting=True)
 
 
-deeplabcut.analyze_videos(path_config_file, videofile_path, videotype='.mp4', save_as_csv=True, destfolder=destfolder, dynamic=(True,.5,10))
+# deeplabcut.analyze_videos(path_config_file, videofile_path, videotype='.mp4', save_as_csv=True, destfolder=destfolder, dynamic=(True,.5,10))
 
 # deeplabcut.create_labeled_video(path_config_file, videofile_path, videotype=".mp4", fastmode=True, Frames2plot=list(range(60*60*500,70*60*500 )), save_frames=False, draw_skeleton=True)
