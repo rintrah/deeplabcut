@@ -66,7 +66,7 @@ experimenter	= "Hansen"   # Enter the name of the experimenter.
 # Enter the path of the config file that was just created from the above step (check the folder):
 # path_config_file = "/home/Mackenzie/Reaching/config.yaml"
 
-deeplabcut.extract_frames(path_config_file, mode="automatic", cluster_step=1, userfeedback=True)
+#deeplabcut.extract_frames(path_config_file, mode="automatic", cluster_step=1, userfeedback=True)
 
 # Napari will pop up!
 # Please go to plugin > deeplabcut to start
