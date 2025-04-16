@@ -17,6 +17,12 @@ from deeplabcut.core.engine import Engine
 
 engine = Engine.PYTORCH
 
+not_analyzed = ["/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-10-13-10-44-34.mp4",
+				"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2022-03-16-14-04-55.mp4",
+				"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2022-03-18-14-53-12.mp4",
+				"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2022-03-23-10-11-32.mp4",
+				]
+
 if platform == 'linux' or platform == 'linux2':
     video = ["/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-06-08-14-54-59.mp4",
 							"/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-13-12-49-43.mp4", 
@@ -73,7 +79,7 @@ experimenter	= "Hansen"   # Enter the name of the experimenter.
 # then, drag-and-drop the project configuration file into the viewer (the value of path_config_file)
 # finally, drop the folder containing the images (in 'labeled-data') in the viewer.
 
-deeplabcut.label_frames(path_config_file)
+# deeplabcut.label_frames(path_config_file)
 
 # deeplabcut.check_labels(path_config_file) # This creates a subdirectory with the frames + your labels.
 
@@ -82,7 +88,7 @@ deeplabcut.label_frames(path_config_file)
 # import napari
 # napari.Viewer()
 
-# deeplabcut.create_training_dataset(path_config_file)  # Remember, there are several networks you can pick, the default is resnet-50!
+# deeplabcut.create_training_dataset(path_config_file, net_type='resnet_50')  # Remember, there are several networks you can pick, the default is resnet-50!
 
 # deeplabcut.train_network(path_config_file)
 
@@ -91,4 +97,4 @@ deeplabcut.label_frames(path_config_file)
 
 # deeplabcut.analyze_videos(path_config_file, videofile_path, videotype='.mp4', save_as_csv=True, destfolder=destfolder, dynamic=(True,.5,10))
 
-# deeplabcut.create_labeled_video(path_config_file, videofile_path, videotype=".mp4", fastmode=True, Frames2plot=list(range(60*60*500,70*60*500 )), save_frames=False, draw_skeleton=True)
+deeplabcut.create_labeled_video(path_config_file, "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-13-12-49-43.mp4", videotype=".mp4", fastmode=False, save_frames=False, draw_skeleton=True)
