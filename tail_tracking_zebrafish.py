@@ -88,13 +88,15 @@ experimenter	= "Hansen"   # Enter the name of the experimenter.
 # import napari
 # napari.Viewer()
 
-# deeplabcut.create_training_dataset(path_config_file, net_type='resnet_50')  # Remember, there are several networks you can pick, the default is resnet-50!
+deeplabcut.create_training_dataset(path_config_file, net_type='resnet_50')  # Remember, there are several networks you can pick, the default is resnet-50!
 
-# deeplabcut.train_network(path_config_file)
+deeplabcut.train_network(path_config_file)
 
-# deeplabcut.evaluate_network(path_config_file, plotting=True)
+deeplabcut.evaluate_network(path_config_file, plotting=True)
 
 
-# deeplabcut.analyze_videos(path_config_file, videofile_path, videotype='.mp4', save_as_csv=True, destfolder=destfolder, dynamic=(True,.5,10))
+deeplabcut.analyze_videos(path_config_file, videofile_path, videotype='.mp4', save_as_csv=True, destfolder=destfolder, dynamic=(True,.5,10))
 
-deeplabcut.create_labeled_video(path_config_file, "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-13-12-49-43.mp4", videotype=".mp4", fastmode=False, save_frames=False, draw_skeleton=True)
+#deeplabcut.create_labeled_video(path_config_file, "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-13-12-49-43.mp4", videotype=".mp4", fastmode=False, save_frames=False, draw_skeleton=True)
+
+# deeplabcut.extract_outlier_frames(path_config_file, ["/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-13-12-49-43.mp4"])
