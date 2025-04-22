@@ -103,4 +103,4 @@ experimenter	= "Hansen"   # Enter the name of the experimenter.
 
 #deeplabcut.create_labeled_video(path_config_file, "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-13-12-49-43.mp4", videotype=".mp4", fastmode=False, save_frames=False, draw_skeleton=True)
 
-deeplabcut.extract_outlier_frames(path_config_file, ["/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-07-13-12-49-43.mp4"])
+deeplabcut.extract_outlier_frames(path_config_file, ["/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2021-06-08-14-54-59.mp4", "/home/enrique/DeepLabCut/One-photon-Hansen-04-03-2025/analyze-videos/2022-02-18-13-11-27.mp4"])
